@@ -1,5 +1,6 @@
 import pygame
 from pygame.locals import *
+from scene_package.slider import timer
 
 
 class Guagame():
@@ -9,6 +10,7 @@ class Guagame():
     def __init__(self):
         self.screen = pygame.display.set_mode((400,600))
         self.scene = None
+        self.x_scroll = 55
 
     def clear(self):
         self.screen.fill((255, 255, 255))
@@ -32,10 +34,15 @@ class Guagame():
                 if k in self.scene.actions:
                     self.scene.actions[k]()
 
+    def timer(self):
+        self.x_scroll = timer(self.screen, self.x_scroll)
+        pygame.display.update()
+
     def begin(self):
-        while self.scene.is_transited is False:
+        while True:
             self.scene.get_event()
             self.action()
             self.draw()
+            # self.timer()
             self.update()
-            # self.scene.transited()
+

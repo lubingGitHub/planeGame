@@ -15,7 +15,7 @@ def rectIntersects(a, b):
 def images():
     d = {
          'bullet': 'image/bullet1.png',
-         'background': 'image/background.png',
+         'background': 'image/background2.png',
          'player': 'image/player.png',
          'cloud': 'image/cloud.jpg',
          'enemy2': 'image/enemy2.png',

@@ -2,11 +2,11 @@ import pygame
 from pygame.locals import *
 from sys import exit
 from scene.guagame_test import Guagame
+from scene_package.slider import timer
 
 
 class SceneBasic:
     def __init__(self):
-        self.is_transited = False
         self.game = Guagame()
         self.keydowns = {}
         self.actions = {
@@ -47,11 +47,3 @@ class SceneBasic:
     def add_elements(self, img):
         img.scene = self
         self.elements.append(img)
-
-    def begin(self):
-        while self.is_transited is False:
-            self.get_event()
-            self.action()
-            self.draw()
-            self.draw_tips()
-            self.update()

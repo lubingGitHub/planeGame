@@ -6,6 +6,8 @@ from scene.player import Player
 from scene.enemy import Enemy
 from scene.cloud import Cloud
 from scene.bullet import Bullet
+from scene_package.slider import timer
+from config import config
 
 
 class Scene(SceneBasic):
@@ -17,6 +19,7 @@ class Scene(SceneBasic):
         self.bullet = Bullet()
         self.player.x = 100
         self.player.y = 150
+        self.x_scroll = 55
         self.number_of_enemies = 10
         self.actions = {
             pygame.K_d: self.player.move_right,
@@ -33,15 +36,11 @@ class Scene(SceneBasic):
         self.add_elements(self.cloud)
         self.add_enemies()
 
-
-    # def draw(self):
-    #     self.game.draw_image(self.bg)
-    #     self.game.draw_image(self.player)
-
     def update(self):
-        # self.cloud.y += 1
+        config['player_speed'] = self.timer(490)
+        config['bullet_speed'] = self.timer(450)
+        # config['player_speed'] = self.timer(490)
         super().update()
-        # self.player.fire()
 
     def add_enemies(self):
         es = []
@@ -50,4 +49,10 @@ class Scene(SceneBasic):
             es.append(e)
             self.add_elements(e)
         self.enemies = es
+
+    def timer(self, y):
+        self.x_scroll = timer(self.game.screen, self.x_scroll, y)
+        pygame.display.update()
+        return self.x_scroll / 10
+
 
